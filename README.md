@@ -44,7 +44,6 @@ python main.py \
   --colsample-bytree 0.8160429788082401 \
   --colsample-bylevel 0.21593167059144303 \
   --colsample-bynode 0.5606966901894666 \
-  --dataset-root /home/ksadowski/datasets \
   --submission
 ```
 
