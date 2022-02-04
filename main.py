@@ -149,7 +149,7 @@ def run(args: argparse.ArgumentParser) -> Tuple[float]:
         objective='multi:softprob',
         eval_metric='mlogloss',
         booster='gbtree',
-        tree_method='auto',
+        tree_method='hist',
         gamma=args.gamma,
         min_child_weight=args.min_child_weight,
         max_delta_step=args.max_delta_step,
