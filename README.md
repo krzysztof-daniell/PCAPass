@@ -21,15 +21,16 @@ long-range dependencies in graph structured data.
 ![PCAPass Layer](misc/pcapass_pipeline.png)
 
 
-| dataset       | test accuracy | validation accuracy |
-| :-----------: | :-----------: | :-----------------: |
-| ogbn-arxiv    | 71.87 ± 0.03  | 73.25 ± 0.05        |
-| ogbn-products | 81.15 ± 0.02  | 92.00 ± 0.05        |
-| Reddit        | 96.26 ± 0.02  | 96.29 ± 0.04        |
+| dataset         | gbdt     | test accuracy | validation accuracy |
+| :-------------- | :------- | :------------ | :------------------ |
+| ogbn-arxiv      | XGBoost  | 71.87 ± 0.03  | 73.25 ± 0.05        |
+| ogbn-papers100M | LightGBM | 65.91 ± 0.03  | 69.82 ± 0.02        |
+| ogbn-products   | XGBoost  | 81.15 ± 0.02  | 92.00 ± 0.05        |
+| Reddit          | XGBoost  | 96.26 ± 0.02  | 96.29 ± 0.04        |
 
 ### ogbn-arxiv
 ```
-python main.py \
+python train_pcapass_xgboost.py \
   --dataset ogbn-arxiv \
   --reverse-edges \
   --self-loop \
@@ -47,9 +48,29 @@ python main.py \
   --submission
 ```
 
+### ogbn-papers100M
+```
+python train_pcapass_lightgbm.py \
+  --dataset ogbn-papers100M \
+  --reverse-edges \
+  --self-loop \
+  --khop 10 \
+  --hidden-feats 177 \
+  --boosting-type goss \
+  --num-leaves 418 \
+  --max-depth 151 \
+  --lr 0.01 \
+  --min-child-weight 22.08727947972941 \
+  --min-child-samples 20 \
+  --colsample-bytree 0.35580789790040446 \
+  --top-rate 0.3917170948942138 \
+  --other-rate 0.1 \
+  --submission
+```
+
 ### ogbn-products
 ```
-python main.py \
+python train_pcapass_xgboost.py \
   --dataset ogbn-products \
   --self-loop \
   --khop 24 \
@@ -68,7 +89,7 @@ python main.py \
 
 ### Reddit
 ```
-python main.py \
+python train_pcapass_xgboost.py \
   --dataset ogbn-arxiv \
   --self-loop \
   --khop 21 \
